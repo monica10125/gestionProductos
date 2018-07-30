@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Start Page</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body>
+         <h:form>    
+
+            <p:menubar>
+                <f:facet name="options">
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <p:commandButton icon=" ui-icon-key" value="Ingresar" type="button" onclick="PF('dlg2').show();" />
+
+                    </h:panelGrid>
+                </f:facet>
+            </p:menubar>
+
+
+            <p:dialog header="Login" widgetVar="dlg2" modal="true" height="250" width="460">
+
+
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+                <h:panelGrid columns="2" cellpadding="5" width="380" id="datosL" >
+                    <h:outputLabel for="username" value="Usuario:" />
+                    <p:inputText id="username" value="#{login.identificacion}" 
+                                  required="true" label="usuario" maxlength="20" size="30"/>
+
+
+                    <h:outputLabel for="password" value="Clave:" />
+                    <p:password  id="password"  required="true"
+                                 label="clave" value="#{login.clave}" />
+
+
+                    <p:commandButton  id="loginButton" value="Login"
+                                      update="growl" action="#{login.iniciarSesion()}"
+                                      oncomplete="handleLoginRequest(xhr, status, args)" />
+
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+        
+         <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.estarLogueado) {
+                    PF('dlg2').jq.effect("shake", {times: 5}, 100);
+                } else {
+                    PF('dlg2').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="app/administrador/gestionProductos.xhtml" x="617" y="32" zoom="false"/>
+        <Node id="templates/administrador.xhtml" x="34" y="32" zoom="true"/>
+        <Node id="app/administrador/ingresarproducto.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="380" y="32" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

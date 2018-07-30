@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../templates/administrador.xhtml">
+
+            <ui:define name="content">
+               
+                <p:growl id="mensajes" autoUpdate="true" severity="info, fatal, error, warn"  showDetail="true"></p:growl>
+                <h:form id="Registro_productos" class="formularios">
+                    <p:outputLabel value="Registro de productos"></p:outputLabel>
+
+                    <h:panelGrid columns="1" id="contenedor">
+
+                        <p:outputLabel for="producto" value="Producto:" />
+                        <p:inputText id="producto" value="#{productoController.producto.nombreProducto}" required="true" label="leche" requiredMessage="el nombre del producto es requerido">
+                            <f:validateLength minimum="4" maximum="50"/>
+                        </p:inputText>
+                        <p:message for="producto" display="icon" />
+
+                        <p:outputLabel for="descripcion" value="descripcion:" />
+                        <p:inputTextarea id="descripcion" rows="6" cols="33" maxlength="100" value="#{productoController.producto.descripcionProducto}">         
+                        </p:inputTextarea> 
+                        <p:message for="descripcion" display="icon" />
+
+                        <p:outputLabel for="precio" value="Precio:" />
+                        <p:inputText id="precio" value="#{productoController.precioP}" required="true" label="300" requiredMessage="el precio del producto es requerido">
+                            <f:validateLength minimum="3" maximum="11"/>
+                        </p:inputText>
+                         <p:message for="precio" display="icon" />
+                         <p:outputLabel for="CantidadStock" value="CantidadStock :" />
+                         <p:inputNumber id="CantidadStock" value="#{productoController.producto.cantidadStock}" required="true" label="1" requiredMessage="la cantidad de productos es requerida">
+                             <f:validateLongRange minimum="1" ></f:validateLongRange>
+                        </p:inputNumber>
+                         <p:message for="CantidadStock" display="icon" />
+                          <p:outputLabel for="codigoBarras" value="codigo Barras:" />
+                         <p:inputNumber id="codigoBarras" value="#{productoController.producto.codigoBarra}" required="true" label="1" requiredMessage="el codigo de barras del producto es requerido">
+                             <f:validateLongRange minimum="1"></f:validateLongRange>
+                               <f:validateLength minimum="1" maximum="11"/>
+                        </p:inputNumber>
+                         <p:message for="codigoBarras" display="icon" />
+                         <p:outputLabel value="Selecione la categoria" for="categoria"> </p:outputLabel>
+                         <p:selectOneMenu  value="#{productoController.asignarCategoria()}" style="width: 300px; " id ="categoria" required="true" requiredMessage="la categoria es requerida">
+                         
+                          <f:selectItems value="#{categoriaC.listarCategorias()}" var="categoria" itemLabel="#{categoria.nombreCategoria}" />
+                         <f:converter converterId="c"></f:converter> 
+                      </p:selectOneMenu>
+                         
+                         <p:commandButton  style=" margin-top:20px; height: 30px" actionListener="#{productoController.insertarProducto()}" title="yes" value="Registrar" />
+                    </h:panelGrid>
+
+                </h:form>
+
+                
+               
+            </ui:define>
+
+           
+
+        </ui:composition>
+
+    </body>
+</html>
